@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "ItemClass.h"
 #include "InventoryComponent.generated.h"
 
 
@@ -19,10 +20,31 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
+	class UDataTable* ItemDataTable;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
+	float MaxCarryWeight;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
+	TArray<FName> ItemIDs;
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	bool AddItem(FName ItemID);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void RemoveItem(FName ItemID);
+	
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	bool GetItemData(FName ItemID, FItemData& OutItemData) const;
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	float GetCurrentWeight() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void DropLastItem();
 };
