@@ -34,7 +34,7 @@ struct FItemData : public FTableRowBase
 	UStaticMesh* ItemMesh;
 };
 UCLASS(Blueprintable,BlueprintType)
-class INVENTORYSYSTEM_API AItemClass : public AActor
+class INVENTORYSYSTEMPLUGIN_API AItemClass : public AActor
 {
 	GENERATED_BODY()
 	
